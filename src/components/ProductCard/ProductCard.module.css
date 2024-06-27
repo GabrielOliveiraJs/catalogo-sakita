@@ -1,0 +1,35 @@
+.card {
+    width: 300px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.card img {
+    width: 200px;
+    max-width: 100%;
+}
+
+.card .body {
+    text-align: center;
+    padding: 5px 0;
+    width: 100%;
+}
+
+.card button {
+    margin-top: 5px;
+    background-color: var(--primary-color);
+    border: none;
+    width: 100%;
+}
+
+.card button:hover {
+    background-color: var(--secondary-color);
+}

@@ -1,0 +1,20 @@
+.navbar {
+    background-color: var(--primary-color);
+}
+
+.navbar .brand {
+    color: var(--text-color);
+}
+
+.collapse {
+    background-color: #fff;
+}
+
+.navLink {
+    color: var(--text-color);
+    transition: 0.2s ease;
+}
+
+.navLink:hover {
+    font-weight: bold;
+}
