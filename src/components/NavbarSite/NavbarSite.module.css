@@ -4,6 +4,17 @@
 
 .navbar .brand {
     color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.navbar .brand img {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 2px;
 }
 
 .collapse {

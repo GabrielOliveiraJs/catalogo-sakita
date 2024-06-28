@@ -1,4 +1,3 @@
-import styles from './Filter.module.css'
 import { Container, Form } from 'react-bootstrap'
 
 const Filter = ({ selectedCategory, setSelectedCategory, categories, setSearchQuery }) => {
