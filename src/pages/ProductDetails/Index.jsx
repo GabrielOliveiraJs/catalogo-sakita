@@ -1,6 +1,7 @@
-import { useParams } from 'react-router-dom'
 import styles from './ProductDetails.module.css'
+import { useParams } from 'react-router-dom'
 import { useProductsContext } from '../../contexts/Porducts'
+import { Button } from 'react-bootstrap'
 
 const ProductDetails = () => {
   const { id } = useParams()
@@ -8,17 +9,24 @@ const ProductDetails = () => {
   const filteredProduct = filterProduct(id)
 
   return (
-    <div>
+    <>
       {filteredProduct.map((product) => (
-        <div key={product.productID}>
-          <img src={product.product_image1} alt={product.product_name} />
-          <h2>{product.product_name}</h2>
-          <p>{product.product_description}</p>
-          <p>{product.product_price}</p>
-          <p>{product.product_category}</p>
+        <div key={product.productID} className={styles.container}>
+          <div className={styles.imageContainer}>
+            <img src={product.product_image1} alt={product.product_name} />
+          </div>
+          <div className={styles.detailsContainer}>
+            <h1>{product.product_name}</h1>
+            <p>{product.product_description}</p>
+            <p>Código(s) do produto: {product.product_code}</p>
+
+            <a href={product.product_link} target='_blank'>
+              <Button className={styles.btnLink}>Link do Produto</Button>
+            </a>
+          </div>
         </div>
       ))}
-    </div>
+    </>
   )
 }
 
