@@ -1,6 +1,6 @@
 import styles from './ProductDetails.module.css'
 import { useParams } from 'react-router-dom'
-import { useProductsContext } from '../../contexts/Porducts'
+import { useProductsContext } from '../../contexts/Products'
 import { Button } from 'react-bootstrap'
 
 const ProductDetails = () => {

@@ -1,7 +1,7 @@
 import styles from './Home.module.css'
 import ProductCard from '../../components/ProductCard/Index'
 import Filter from '../../components/Filter/Index'
-import { useProductsContext } from '../../contexts/Porducts'
+import { useProductsContext } from '../../contexts/Products'
 import { useFilter } from '../../Hooks/useFilter'
 import NoResultsFound from '../../components/NoResultsFound/Index'
 

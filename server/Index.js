@@ -22,7 +22,7 @@ app.get('/products', (req, res) => {
     })
 })
 
-app.get ('/categories', (req, res) => {
+app.get('/categories', (req, res) => {
     const q = "SELECT * FROM categories"
     db.query(q, (err, data) => {
         if (err) return res.json(err)
@@ -30,6 +30,14 @@ app.get ('/categories', (req, res) => {
     })
 })
 
-app.listen(8800,  () => {
+app.get('/users', (req, res) => {
+    const q = 'SELECT * FROM users'
+    db.query(q, (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+app.listen(8800, () => {
     console.log('Server conectado na porta 8800')
 })
