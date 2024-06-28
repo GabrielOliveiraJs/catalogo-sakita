@@ -3,6 +3,7 @@ import BasePage from './pages/BasePage/Index'
 import Home from './pages/Home/Index'
 import ProductDetails from './pages/ProductDetails/Index'
 import ProductsProvider from './contexts/Porducts'
+import Login from './pages/Login/Index'
 
 const AppRoutes = () => {
     return (
@@ -12,6 +13,7 @@ const AppRoutes = () => {
                     <Route path='/' element={<BasePage />}>
                         <Route index element={<Home />} />
                         <Route path='/product/:id' element={<ProductDetails />} />
+                        <Route path='/login' element={<Login />} />
                     </Route>
                 </Routes>
             </ProductsProvider>

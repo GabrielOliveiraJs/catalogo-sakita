@@ -5,12 +5,12 @@ import NavbarSite from '../../components/NavbarSite/Index'
 
 const BasePage = () => {
   return (
-    <main className={styles.mainContainer}>
+    <div className={styles.mainContainer}>
       <NavbarSite />
-      <div>
+      <main>
         <Outlet />
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }
 

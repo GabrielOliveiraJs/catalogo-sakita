@@ -18,6 +18,11 @@ const NavbarSite = () => {
                             <span className={styles.navLink}>Catálogo</span>
                         </Link>
                     </Nav>
+                    <Nav>
+                        <Link to="/login" className='nav-link'>
+                            <span className={styles.navLink}>Entrar</span>
+                        </Link>
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

@@ -1,0 +1,8 @@
+.formBtn {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.formBtn:hover{
+    background-color: var(--secondary-color);
+}

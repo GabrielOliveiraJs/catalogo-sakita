@@ -2,3 +2,9 @@
     background-color: #f9f7f3;
     min-height: 100vh;
 }
+
+.mainContainer main {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1440px;
+}
