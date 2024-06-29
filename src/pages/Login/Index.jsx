@@ -1,15 +1,19 @@
-import { useState } from 'react'
 import useLogin from '../../Hooks/useLogin'
+import AlertMessage from '../../components/AlertMessage/Index'
 import styles from './Login.module.css'
 import { Button, Container, Form } from "react-bootstrap"
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-    const { login, error, email, password, setEmail, setPassword } = useLogin()
+    const { login, error, email, password, setEmail, setPassword, isLoggedIn } = useLogin()
+    const navigate = useNavigate()
 
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        login()
+        await login()
+        if (isLoggedIn) {
+            navigate('/')
+        }
     }
 
     return (
@@ -36,11 +40,13 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
+
+                {error && <AlertMessage variant='danger'>{error}</AlertMessage>}
+
                 <Button className={styles.formBtn} type="submit">
                     Entrar
                 </Button>
             </Form>
-            {error && <p>{error}</p>}
         </Container>
     )
 }

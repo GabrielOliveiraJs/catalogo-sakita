@@ -3,7 +3,7 @@ import ProductCard from '../../components/ProductCard/Index'
 import Filter from '../../components/Filter/Index'
 import { useProductsContext } from '../../contexts/Products'
 import { useFilter } from '../../Hooks/useFilter'
-import NoResultsFound from '../../components/NoResultsFound/Index'
+import AlertMessage from '../../components/AlertMessage/Index'
 
 const Home = () => {
 
@@ -21,7 +21,7 @@ const Home = () => {
       />
       <ul className={styles.container}>
         {
-          filteredProducts.length === 0 ? <NoResultsFound />
+          filteredProducts.length === 0 ? <AlertMessage variant='light'>Nenhum resultado encontrado.</AlertMessage>
             :
             filteredProducts.map(product => (
               <li key={product.productID}>

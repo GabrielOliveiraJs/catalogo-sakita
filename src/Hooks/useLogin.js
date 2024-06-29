@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useLogin() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -15,10 +15,8 @@ export default function useLogin() {
             const matchingUser = users.find(user => user.user_email === email && user.user_password === password);
 
             if (matchingUser) {
+                localStorage.setItem('userData', JSON.stringify({ userId: matchingUser.userID, username: matchingUser.user_name }));
                 setIsLoggedIn(true)
-                console.log('Logado')
-                //Set the user in the section herr
-
                 setEmail('')
                 setPassword('')
             } else {
@@ -28,6 +26,18 @@ export default function useLogin() {
             setError('Um erro ocorreu durante a tentativa de login')
         }
     }
+
+    const logout = () => {
+        localStorage.removeItem('userData');
+        setIsLoggedIn(false);
+    }
+
+    useEffect(() => {
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            setIsLoggedIn(true);
+        }
+    }, [])
 
     return {
         isLoggedIn,
