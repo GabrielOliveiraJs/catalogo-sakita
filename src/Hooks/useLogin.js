@@ -12,13 +12,12 @@ export default function useLogin() {
             const response = await axios.get(`http://localhost:8800/users`)
             const users = response.data;
 
-            const matchingUser = users.find(user => user.user_email === email && user.user_password === password);
+            const matchingUser = users.find(user => user.user_email === email && user.user_password === password)
 
             if (matchingUser) {
-                localStorage.setItem('userData', JSON.stringify({ userId: matchingUser.userID, username: matchingUser.user_name }));
+                localStorage.setItem('userData', JSON.stringify({ userId: matchingUser.userID, username: matchingUser.user_name }))
                 setIsLoggedIn(true)
-                setEmail('')
-                setPassword('')
+
             } else {
                 setError('Endereço de email e/ou senha incorreto(s), por favor, verifique suas informações')
             }
@@ -32,12 +31,15 @@ export default function useLogin() {
         setIsLoggedIn(false);
     }
 
-    useEffect(() => {
-        const userData = localStorage.getItem('userData');
-        if (userData) {
-            setIsLoggedIn(true);
+    //! Fazer alterações aqui
+    setInterval(() => {
+        if (localStorage.getItem('userData')) {
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
         }
-    }, [])
+    }, 1000)
+    //!==============================
 
     return {
         isLoggedIn,
@@ -46,7 +48,9 @@ export default function useLogin() {
         email,
         password,
         setEmail,
-        setPassword
+        setPassword,
+        setIsLoggedIn,
+        logout
     }
 
 }

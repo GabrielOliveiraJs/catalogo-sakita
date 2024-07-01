@@ -2,8 +2,12 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 import styles from './NavbarSite.module.css'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/Logo_Sakita.png'
+import useLogin from '../../Hooks/useLogin'
+import { useEffect } from 'react'
 
 const NavbarSite = () => {
+    const { isLoggedIn, logout } = useLogin()
+
     return (
         <Navbar expand="lg" className={styles.navbar} >
             <Container>
@@ -19,9 +23,19 @@ const NavbarSite = () => {
                         </Link>
                     </Nav>
                     <Nav>
-                        <Link to="/login" className='nav-link'>
-                            <span className={styles.navLink}>Entrar</span>
-                        </Link>
+                        {
+                            isLoggedIn ?
+                                (
+                                    <button className='nav-link' onClick={logout}>
+                                        <span className={styles.navLink}>Sair</span>
+                                    </button>
+                                ) : (
+
+                                    <Link to="/login" className='nav-link'>
+                                        <span className={styles.navLink}>Entrar</span>
+                                    </Link>
+                                )
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>
