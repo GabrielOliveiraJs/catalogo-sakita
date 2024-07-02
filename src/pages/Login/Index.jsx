@@ -5,7 +5,7 @@ import { Button, Container, Form } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-    const { login, error, email, password, setEmail, setPassword, setIsLoggedIn } = useLogin()
+    const { login, error, email, password, setEmail, setPassword } = useLogin()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {

@@ -1,12 +1,23 @@
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import styles from './NavbarSite.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/Logo_Sakita.png'
 import useLogin from '../../Hooks/useLogin'
-import { useEffect } from 'react'
 
 const NavbarSite = () => {
     const { isLoggedIn, logout } = useLogin()
+    const navigate = useNavigate()
+    const logoutOfTheApp = () => {
+        logout()
+        navigate('/')
+    }
+
+    if (isLoggedIn) {
+        console.log('logou')
+    } else {
+        console.log('deslogou')
+    }
+
 
     return (
         <Navbar expand="lg" className={styles.navbar} >
@@ -21,12 +32,20 @@ const NavbarSite = () => {
                         <Link to="/" className='nav-link'>
                             <span className={styles.navLink}>Catálogo</span>
                         </Link>
+                        {
+                            isLoggedIn ?
+                                (
+                                    <Link to="/create-product" className='nav-link'>
+                                        <span className={styles.navLink}>Adicionar</span>
+                                    </Link>
+                                ) : null
+                        }
                     </Nav>
                     <Nav>
                         {
                             isLoggedIn ?
                                 (
-                                    <button className='nav-link' onClick={logout}>
+                                    <button className='nav-link' onClick={logoutOfTheApp}>
                                         <span className={styles.navLink}>Sair</span>
                                     </button>
                                 ) : (

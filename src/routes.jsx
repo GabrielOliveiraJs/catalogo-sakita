@@ -15,7 +15,7 @@ const AppRoutes = () => {
                         <Route index element={<Home />} />
                         <Route path='/product/:id' element={<ProductDetails />} />
                         <Route path='/login' element={<Login />} />
-                        <Route path='/create-product' element={CreateProductForm} />
+                        <Route path='/create-product' element={<CreateProductForm />} />
                     </Route>
                 </Routes>
             </ProductsProvider>

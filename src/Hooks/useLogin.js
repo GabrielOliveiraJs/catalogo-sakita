@@ -16,10 +16,12 @@ export default function useLogin() {
 
             if (matchingUser) {
                 localStorage.setItem('userData', JSON.stringify({ userId: matchingUser.userID, username: matchingUser.user_name }))
+
                 setIsLoggedIn(true)
 
             } else {
                 setError('Endereço de email e/ou senha incorreto(s), por favor, verifique suas informações')
+                return
             }
         } catch (error) {
             setError('Um erro ocorreu durante a tentativa de login')
@@ -32,13 +34,14 @@ export default function useLogin() {
     }
 
     //! Fazer alterações aqui
-    setInterval(() => {
+    useEffect(() => {
         if (localStorage.getItem('userData')) {
             setIsLoggedIn(true)
         } else {
             setIsLoggedIn(false)
         }
-    }, 1000)
+        console.log('Console do useEffect: ',isLoggedIn)
+    }, [isLoggedIn])
     //!==============================
 
     return {
