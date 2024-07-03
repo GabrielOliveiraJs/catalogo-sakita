@@ -40,7 +40,7 @@ export default function useLogin() {
         } else {
             setIsLoggedIn(false)
         }
-        console.log('Console do useEffect: ',isLoggedIn)
+        //console.log('Console do useEffect: ',isLoggedIn)
     }, [isLoggedIn])
     //!==============================
 

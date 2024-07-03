@@ -12,11 +12,11 @@ const NavbarSite = () => {
         navigate('/')
     }
 
-    if (isLoggedIn) {
-        console.log('logou')
-    } else {
-        console.log('deslogou')
-    }
+    // if (isLoggedIn) {
+    //     console.log('logou')
+    // } else {
+    //     console.log('deslogou')
+    // }
 
 
     return (
