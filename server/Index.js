@@ -13,7 +13,7 @@ const options = {
     origin: 'http://localhost:5173', // Replace with your client's domain
     methods: 'GET,POST,PUT,PATCH,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
-  };
+}
 app.use(cors(options))
 
 app.use(express.urlencoded({ extended: true }))
@@ -50,8 +50,8 @@ app.get('/users', (req, res) => {
 })
 
 app.post('/api/products', upload.single('productImage'), async (req, res) => {
-    const { name, category, description, code, image, link, price } = req.body
-    const q = `INSERT INTO products (product_name, product_category, product_description, product_code, product_image1, product_image2, product_image3, product_image4, product_link, product_price) VALUES ('${name}','${category}','${description}','${code}','${req.file.path}','','','','${link}','${price}')`
+    const { name, category, description, code, smallImage, bigImage, link, brand } = req.body
+    const q = `INSERT INTO products (product_name, product_category, product_description, product_code, product_image_small, product_image_big, product_link, product_brand) VALUES ('${name}','${category}','${description}','${code}','${smallImage}','${bigImage}','${link}', '${brand}')`
 
     db.query(q, (err, data) => {
         if (err) return res.json(err)

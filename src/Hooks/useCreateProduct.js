@@ -3,36 +3,48 @@ import { useState } from "react";
 
 export function useCreateProduct() {
     const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
-    const [success, setSuccess] = useState(false)
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
     const [productName, setProductName] = useState('')
     const [productCategory, setProductCategory] = useState('')
     const [productDescription, setProductDescription] = useState('')
     const [productCode, setProductCode] = useState('')
-    const [productImage, setProductImage] = useState(null)
+    //const [productImage, setProductImage] = useState(null)
+    const [productBigImage, setProductBigImage] = useState('')
+    const [productSmallImage, setProductSmallImage] = useState('')
     const [productLink, setProductLink] = useState('')
-    const [productPrice, setProductPrice] = useState('')
+    const [productBrand, setProductBrand] = useState('')
 
     const createProduct = async (product) => {
         setIsLoading(true)
         try {
             const response = await axios.post('http://localhost:8800/api/products', product)
-            setSuccess(true)
             setProductName('')
             setProductCategory('')
             setProductDescription('')
             setProductCode('')
-            setProductImage(null)
+            // setProductImage(null)
+            setProductBigImage('')
+            setProductSmallImage('')
             setProductLink('')
-            setProductPrice('')
+            setProductBrand('')
 
+            setSuccess('Produto inserido com sucesso!')
+            console.log(success)
             return response.data
             
         } catch (error) {
-            setError("Erro ao inserir o produto: ", error.message)
+            setError("Erro ao inserir o produto, verifique os campos")
+            console.log(error)
+            return null
         } finally {
             setIsLoading(false)
+            setSuccess('')
+            setError('')
+            console.log(success)
+            console.log(error)
+            console.log(isLoading)
         }
     }
 
@@ -49,11 +61,15 @@ export function useCreateProduct() {
         setProductDescription,
         productCode,
         setProductCode,
-        productImage,
-        setProductImage,
+        // productImage,
+        // setProductImage,
+        productBigImage,
+        setProductBigImage,
+        productSmallImage,
+        setProductSmallImage,
         productLink,
         setProductLink,
-        productPrice,
-        setProductPrice
+        productBrand,
+        setProductBrand
     }
 }

@@ -13,11 +13,11 @@ const ProductDetails = () => {
       {filteredProduct.map((product) => (
         <div key={product.productID} className={styles.container}>
           <div className={styles.imageContainer}>
-            <img src={product.product_image1} alt={product.product_name} />
+            <img src={product.product_image_big} alt={product.product_name} />
           </div>
           <div className={styles.detailsContainer}>
             <h1>{product.product_name}</h1>
-            <p>{product.product_description}</p>
+            <p dangerouslySetInnerHTML={{ __html: product.formatted_description }}></p>
             <p>Código(s) do produto: {product.product_code}</p>
 
             <a href={product.product_link} target='_blank'>

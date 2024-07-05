@@ -22,9 +22,14 @@ export default function ProductsProvider({ children }) {
 
     const filterProduct = (id) => {
         const filteredProduct = productsList.filter(product => product.productID === Number(id))
+
+        if (filteredProduct.length > 0) {
+            filteredProduct[0].formatted_description = filteredProduct[0].formatted_description || filteredProduct[0].product_description.replace(/\n/g, '<br />');
+        }
+
         return filteredProduct
     }
-
+    
     return (
         <ProductsContext.Provider value={{ productsList, setProductsList, filterProduct }}>
             {children}

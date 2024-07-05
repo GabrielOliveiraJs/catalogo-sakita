@@ -26,7 +26,7 @@ export function useFilter() {
         }
 
         if (searchQuery.trim() !== '') {
-            filteredProducts = filteredProducts.filter(product => product.product_name.toLowerCase().includes(searchQuery.toLowerCase()))
+            filteredProducts = filteredProducts.filter(product => product.product_name.toLowerCase().includes(searchQuery.toLowerCase()) || product.product_brand.toLowerCase().includes(searchQuery.toLowerCase()))
         }
         
         return filteredProducts

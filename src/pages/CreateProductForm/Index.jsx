@@ -18,23 +18,27 @@ const CreateProductForm = () => {
     setProductDescription,
     productCode,
     setProductCode,
-    productImage,
-    setProductImage,
+    // productImage,
+    // setProductImage,
+    productBigImage,
+    setProductBigImage,
+    productSmallImage,
+    setProductSmallImage,
     productLink,
     setProductLink,
-    productPrice,
-    setProductPrice
+    productBrand,
+    setProductBrand
   } = useCreateProduct()
 
-  const [selectedFile, setSelectedFile] = useState(null)
+  //const [selectedFile, setSelectedFile] = useState(null)
 
   const handleInputChange = (setter, event) => {
     setter(event.target.value)
   }
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0])
-  }
+  // const handleFileChange = (event) => {
+  //   setSelectedFile(event.target.files[0])
+  // }
 
   const handleCreateProduct = async (e) => {
     e.preventDefault()
@@ -45,9 +49,10 @@ const CreateProductForm = () => {
         category: productCategory,
         description: productDescription,
         code: productCode,
-        image: selectedFile,
+        smallImage: productSmallImage,
+        bigImage: productBigImage,
         link: productLink,
-        price: productPrice
+        brand: productBrand
       }
 
       await createProduct(product)
@@ -66,6 +71,7 @@ const CreateProductForm = () => {
         <Form.Group className="mb-3" controlId="product_name">
           <Form.Label>Nome do Produto</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Digite..."
             onChange={(event) => handleInputChange(setProductName, event)}
@@ -75,6 +81,7 @@ const CreateProductForm = () => {
         <Form.Group className="mb-3" controlId="product_category">
           <Form.Label>Categoria</Form.Label>
           <Form.Select
+            required
             type="text"
             onChange={(event) => handleInputChange(setProductCategory, event)}
           >
@@ -90,6 +97,7 @@ const CreateProductForm = () => {
         <Form.Group className="mb-3" controlId="product_description">
           <Form.Label>Descrição</Form.Label>
           <Form.Control as="textarea"
+            required
             type="text"
             placeholder="Digite..."
             onChange={(event) => handleInputChange(setProductDescription, event)}
@@ -99,22 +107,42 @@ const CreateProductForm = () => {
         <Form.Group className="mb-3" controlId="product_code">
           <Form.Label>Código</Form.Label>
           <Form.Control
+            required
             type="text" placeholder="Digite..."
             onChange={(event) => handleInputChange(setProductCode, event)}
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="product_image1">
+        {/* <Form.Group className="mb-3" controlId="product_image1">
           <Form.Label>Imagem</Form.Label>
           <Form.Control
             type="file"
             onChange={handleFileChange}
+          />
+        </Form.Group> */}
+
+        <Form.Group className="mb-3" controlId="product_image_big">
+          <Form.Label>Caminho da Imagem Grande:</Form.Label>
+          <Form.Control
+            required
+            type="text" placeholder="Digite..."
+            onChange={(event) => handleInputChange(setProductBigImage, event)}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="product_image_big">
+          <Form.Label>Caminho da Imagem Pequena:</Form.Label>
+          <Form.Control
+            required
+            type="text" placeholder="Digite..."
+            onChange={(event) => handleInputChange(setProductSmallImage, event)}
           />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="product_link">
           <Form.Label>Link externo</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Digite..."
             onChange={(event) => handleInputChange(setProductLink, event)}
@@ -122,17 +150,24 @@ const CreateProductForm = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="product_price">
-          <Form.Label>Preço</Form.Label>
+          <Form.Label>Marca</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Digite..."
-            onChange={(event) => handleInputChange(setProductPrice, event)}
+            onChange={(event) => handleInputChange(setProductBrand, event)}
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button
+          {...(isLoading && { disabled: true })}
+          variant="primary"
+          type="submit">
           Adicionar
         </Button>
+        {isLoading && <p>Carregando...</p>}
+        {error && <AlertMessage variant="danger">{error}</AlertMessage>}
+        {success && <AlertMessage variant="success">Produto adicionado com sucesso!</AlertMessage>}
       </Form>
     </>
   )
