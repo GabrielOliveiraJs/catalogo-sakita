@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 const ProductCard = ({ product }) => {
   return (
     <Card className={styles.card}>
-      <Card.Img src={product.product_image_small} alt={product.product_name} />
+      <div className={styles.imageContainer}>
+        <Card.Img src={product.product_image_small} alt={product.product_name} />
+      </div>
       <div className={styles.body}>
         <Card.Title>{product.product_name}</Card.Title>
         <Card.Text>Marca: {product.product_brand}</Card.Text>

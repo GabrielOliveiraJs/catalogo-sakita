@@ -2,11 +2,16 @@ import styles from './ProductDetails.module.css'
 import { useParams } from 'react-router-dom'
 import { useProductsContext } from '../../contexts/Products'
 import { Button } from 'react-bootstrap'
+import { useEffect } from 'react'
 
 const ProductDetails = () => {
   const { id } = useParams()
   const { filterProduct } = useProductsContext()
   const filteredProduct = filterProduct(id)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <>

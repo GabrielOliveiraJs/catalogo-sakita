@@ -82,7 +82,6 @@ const CreateProductForm = () => {
           <Form.Label>Categoria</Form.Label>
           <Form.Select
             required
-            type="text"
             onChange={(event) => handleInputChange(setProductCategory, event)}
           >
             <option value=''>Selecione</option>
@@ -165,6 +164,7 @@ const CreateProductForm = () => {
           type="submit">
           Adicionar
         </Button>
+        
         {isLoading && <p>Carregando...</p>}
         {error && <AlertMessage variant="danger">{error}</AlertMessage>}
         {success && <AlertMessage variant="success">Produto adicionado com sucesso!</AlertMessage>}

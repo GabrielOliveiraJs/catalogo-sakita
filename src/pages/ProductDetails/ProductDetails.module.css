@@ -4,6 +4,7 @@
     gap: 10px;
     background-color: #fff;
     min-height: 100vh;
+    padding-top: 10px;
 }
 
 .imageContainer {
@@ -25,7 +26,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
     justify-content: space-around;
     padding: 10px;
     height: 100%;
