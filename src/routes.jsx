@@ -5,6 +5,7 @@ import ProductDetails from './pages/ProductDetails/Index'
 import ProductsProvider from './contexts/Products'
 import Login from './pages/Login/Index'
 import CreateProductForm from './pages/CreateProductForm/Index'
+import EditProductForm from './pages/EditProductForm/Index'
 
 const AppRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
                         <Route path='/product/:id' element={<ProductDetails />} />
                         <Route path='/login' element={<Login />} />
                         <Route path='/create-product' element={<CreateProductForm />} />
+                        <Route path='/product/edit/:id' element={<EditProductForm />} />
                     </Route>
                 </Routes>
             </ProductsProvider>

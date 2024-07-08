@@ -18,12 +18,13 @@ export function useCreateProduct() {
 
     const createProduct = async (product) => {
         setIsLoading(true)
+
         try {
             const response = await axios.post('http://localhost:8800/api/products', product)
 
-            setTimeout(() => {
+            if (response) {
                 setSuccess('Produto inserido com sucesso!')
-                console.log(success)
+                // console.log(success)
 
                 setProductName('')
                 setProductCategory('')
@@ -34,15 +35,25 @@ export function useCreateProduct() {
                 setProductSmallImage('')
                 setProductLink('')
                 setProductBrand('')
-            }, 0)
+
+                //!Testar:
+                // Adicione um console.log para verificar se o componente está sendo renderizado novamente
+                console.log('Componente está sendo renderizado novamente')
+
+                // Utilize a função de atualização de estado com callback para garantir que as atualizações sejam refletidas corretamente
+                setSuccess('Produto inserido com sucesso!', () => {
+                    console.log(success);
+                })
+            }
 
             return response.data
 
         } catch (error) {
-            setTimeout(() => {
+            if (error) {
                 setError("Erro ao inserir o produto, verifique os campos")
                 console.log(error)
-            }, 0)
+                return null
+            }
             return null
         } finally {
             setIsLoading(false)

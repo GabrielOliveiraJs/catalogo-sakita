@@ -1,10 +1,8 @@
 import { Button, Form } from 'react-bootstrap'
-import { useFilter } from '../../Hooks/useFilter'
 import { useCreateProduct } from '../../Hooks/useCreateProduct'
-import { useState } from 'react'
+import FormInput from '../../components/FormInput/Index'
 
 const CreateProductForm = () => {
-  const { categories } = useFilter()
   const {
     isLoading,
     error,
@@ -68,49 +66,42 @@ const CreateProductForm = () => {
       <h1>Adicionar um novo produto</h1>
       <Form onSubmit={handleCreateProduct}>
 
-        <Form.Group className="mb-3" controlId="product_name">
-          <Form.Label>Nome do Produto</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Digite..."
-            onChange={(event) => handleInputChange(setProductName, event)}
-          />
-        </Form.Group>
+        <FormInput
+          controlId="product_name"
+          label="Nome do Produto"
+          required
+          type="text"
+          placeholder="Digite..."
+          onChange={(event) => handleInputChange(setProductName, event)}
+        />
 
-        <Form.Group className="mb-3" controlId="product_category">
-          <Form.Label>Categoria</Form.Label>
-          <Form.Select
-            required
-            onChange={(event) => handleInputChange(setProductCategory, event)}
-          >
-            <option value=''>Selecione</option>
-            {categories.map(category => (
-              <option key={category.categoryID} value={category.category_name}>
-                {category.category_name}
-              </option>
-            ))}
-          </Form.Select>
-        </Form.Group>
+        <FormInput
+          controlId="product_category"
+          label="Categoria"
+          required
+          type="select"
+          placeholder="Selecione..."
+          onChange={(event) => handleInputChange(setProductCategory, event)}
+          value={productCategory}
+        />
 
-        <Form.Group className="mb-3" controlId="product_description">
-          <Form.Label>Descrição</Form.Label>
-          <Form.Control as="textarea"
-            required
-            type="text"
-            placeholder="Digite..."
-            onChange={(event) => handleInputChange(setProductDescription, event)}
-          />
-        </Form.Group>
+        <FormInput
+          controlId="product_description"
+          label="Descrição"
+          required
+          type="textarea"
+          placeholder="Digite..."
+          onChange={(event) => handleInputChange(setProductDescription, event)}
+        />
 
-        <Form.Group className="mb-3" controlId="product_code">
-          <Form.Label>Código</Form.Label>
-          <Form.Control
-            required
-            type="text" placeholder="Digite..."
-            onChange={(event) => handleInputChange(setProductCode, event)}
-          />
-        </Form.Group>
+        <FormInput
+          controlId="product_code"
+          label="Código"
+          required
+          type="text"
+          placeholder="Digite..."
+          onChange={(event) => handleInputChange(setProductCode, event)}
+        /> 
 
         {/* <Form.Group className="mb-3" controlId="product_image1">
           <Form.Label>Imagem</Form.Label>
@@ -120,43 +111,41 @@ const CreateProductForm = () => {
           />
         </Form.Group> */}
 
-        <Form.Group className="mb-3" controlId="product_image_big">
-          <Form.Label>Caminho da Imagem Grande:</Form.Label>
-          <Form.Control
-            required
-            type="text" placeholder="Digite..."
-            onChange={(event) => handleInputChange(setProductBigImage, event)}
-          />
-        </Form.Group>
+        <FormInput 
+          controlId="product_image_big"
+          label="Caminho da Imagem Grande"
+          required
+          type="text"
+          placeholder="Digite..."
+          onChange={(event) => handleInputChange(setProductBigImage, event)}
+        />
 
-        <Form.Group className="mb-3" controlId="product_image_big">
-          <Form.Label>Caminho da Imagem Pequena:</Form.Label>
-          <Form.Control
-            required
-            type="text" placeholder="Digite..."
-            onChange={(event) => handleInputChange(setProductSmallImage, event)}
-          />
-        </Form.Group>
+        <FormInput
+          controlId="product_image_small"
+          label="Caminho da Imagem Pequena"
+          required
+          type="text"
+          placeholder="Digite..."
+          onChange={(event) => handleInputChange(setProductSmallImage, event)}
+        />
 
-        <Form.Group className="mb-3" controlId="product_link">
-          <Form.Label>Link externo</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Digite..."
-            onChange={(event) => handleInputChange(setProductLink, event)}
-          />
-        </Form.Group>
+        <FormInput
+          controlId="product_link"
+          label="Link externo"
+          required
+          type="text"
+          placeholder="Digite..."
+          onChange={(event) => handleInputChange(setProductLink, event)}
+        />
 
-        <Form.Group className="mb-3" controlId="product_price">
-          <Form.Label>Marca</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Digite..."
-            onChange={(event) => handleInputChange(setProductBrand, event)}
-          />
-        </Form.Group>
+        <FormInput 
+          controlId="product_brand"
+          label="Marca"
+          required
+          type="text"
+          placeholder="Digite..."
+          onChange={(event) => handleInputChange(setProductBrand, event)}
+        />
 
         <Button
           {...(isLoading && { disabled: true })}
@@ -164,7 +153,7 @@ const CreateProductForm = () => {
           type="submit">
           Adicionar
         </Button>
-        
+
         {isLoading && <p>Carregando...</p>}
         {error && <AlertMessage variant="danger">{error}</AlertMessage>}
         {success && <AlertMessage variant="success">Produto adicionado com sucesso!</AlertMessage>}
