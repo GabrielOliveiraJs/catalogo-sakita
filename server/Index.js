@@ -2,12 +2,12 @@ import express, { json } from 'express'
 import mysql from 'mysql2'
 import cors from 'cors'
 import multer from 'multer'
+import bodyParser from 'body-parser'
 
 const app = express()
-
 const upload = multer({ dest: '../public/images/products/' })
-
 app.use(express.json())
+app.use(bodyParser.json())
 
 const options = {
     origin: 'http://localhost:5173', // Replace with your client's domain
@@ -56,6 +56,42 @@ app.post('/api/products', upload.single('productImage'), async (req, res) => {
     db.query(q, (err, data) => {
         if (err) return res.json(err)
         return json(data)
+    })
+})
+
+//!Verificar Lógica:
+app.get('/products/:id', (req, res) => {
+    const productId = req.params.id
+    const query = `SELECT * FROM products WHERE productID = ${productId}`
+
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Erro ao buscar o produto:', error);
+            return res.status(500).json({ error: 'Erro ao buscar o produto' })
+        }
+
+        if (results.length === 0) {
+            console.error('Produto não encontrado')
+            return res.status(404).json({ error: 'Produto não encontrado' })
+        }
+
+        const product = results[0]
+        res.status(200).json(product)
+    })
+})
+
+ //!Verificar Lógica:
+app.put('products/:id', (req, res) => {
+    const productId = req.params.id
+    const updatedFields = req.body
+    const q = `UPDATE products SET ${updatedFields} WHERE productID = ${productId}`
+
+    connection.query(q, values, (error, results) => {
+        if (error) {
+            console.error("Erro ao atualizar o produto:", error)
+            return res.status(500).json({ error: "Erro ao atualizar o produto" })
+        }
+        res.status(200).json({ message: `Produto com ID ${productId} atualizado com sucesso` })
     })
 })
 
