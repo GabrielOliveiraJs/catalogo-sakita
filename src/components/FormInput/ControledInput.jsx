@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap"
 import { useFilter } from "../../Hooks/useFilter"
 
-const FormInput = ({ controlId, label, required, type, placeholder, onChange, value = '', selectedCategory = '' }) => {
+const UncontrolledInput = ({ controlId, label, required, type, placeholder, onChange, value = '', selectedCategory = '' }) => {
     const { categories } = useFilter()
 
     return (
@@ -39,4 +39,4 @@ const FormInput = ({ controlId, label, required, type, placeholder, onChange, va
     )
 }
 
-export default FormInput
+export default UncontrolledInput

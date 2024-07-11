@@ -59,12 +59,11 @@ app.post('/api/products', upload.single('productImage'), async (req, res) => {
     })
 })
 
-//!Verificar Lógica:
 app.get('/products/:id', (req, res) => {
     const productId = req.params.id
     const query = `SELECT * FROM products WHERE productID = ${productId}`
 
-    connection.query(query, (error, results) => {
+    db.query(query, (error, results) => {
         if (error) {
             console.error('Erro ao buscar o produto:', error);
             return res.status(500).json({ error: 'Erro ao buscar o produto' })
@@ -80,18 +79,37 @@ app.get('/products/:id', (req, res) => {
     })
 })
 
- //!Verificar Lógica:
-app.put('products/:id', (req, res) => {
+app.put('/products/:id', (req, res) => {
     const productId = req.params.id
-    const updatedFields = req.body
-    const q = `UPDATE products SET ${updatedFields} WHERE productID = ${productId}`
+    //const updatedFields = req.body
+    const { product_name, product_category, product_description, product_code, product_image_small, product_image_big, product_link, product_brand } = req.body
+    const query = `
+        UPDATE products SET product_name = '${product_name}', product_category = '${product_category}', product_description = '${product_description}', product_code = '${product_code}', product_image_small = '${product_image_small}', product_image_big = '${product_image_big}', product_link = '${product_link}', product_brand = '${product_brand}'
+        WHERE productID = ${productId}
+    `
 
-    connection.query(q, values, (error, results) => {
+    db.query(query, (error, results) => {
         if (error) {
             console.error("Erro ao atualizar o produto:", error)
             return res.status(500).json({ error: "Erro ao atualizar o produto" })
         }
         res.status(200).json({ message: `Produto com ID ${productId} atualizado com sucesso` })
+    })
+})
+
+app.delete('/products/:id', (req, res) => {
+    const productId = req.params.id
+    const query = `DELETE FROM products WHERE productID = ${productId}`
+
+    db.query(query, (error, results) => {
+        if (error) {
+            console.error("Erro ao excluir o produto:", error)
+            return res.status(500).json({ error: "Erro ao excluir o produto" })
+        }
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: "Produto não encontrado" })    
+        }
+        res.status(200).json({ message: `Produto com ID ${productId} excluído com sucesso` })
     })
 })
 

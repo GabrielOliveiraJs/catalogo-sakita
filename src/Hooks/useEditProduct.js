@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useEditProduct() {
     const [isLoading, setIsLoading] = useState(false)
@@ -15,7 +15,6 @@ export function useEditProduct() {
     const [productLink, setProductLink] = useState('')
     const [productBrand, setProductBrand] = useState('')
 
-    //!Verificar Lógica:
     const getProduct = async (id) => {
         try {
             const res = await axios.get(`http://localhost:8800/products/${id}`)
@@ -29,14 +28,11 @@ export function useEditProduct() {
             setProductSmallImage(product_image_small)
             setProductLink(product_link)
             setProductBrand(product_brand)
-            console.log('productName: ', productName)
-
         } catch (error) {
             console.error("Erro ao buscar o produto:", error)
         }
     }
 
-    //!Verificar Lógica:
     const updateProduct = async (id) => {
         setIsLoading(true)
 

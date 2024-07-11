@@ -1,9 +1,10 @@
 import { useEffect } from "react"
-import { Button, Form } from 'react-bootstrap'
+import { Button, Container, Form } from 'react-bootstrap'
 import { useParams } from "react-router-dom"
 import { useEditProduct } from "../../Hooks/useEditProduct"
-import FormInput from "../../components/FormInput/Index"
+import UncontrolledInput from "../../components/FormInput/ControledInput"
 import AlertMessage from "../../components/AlertMessage/Index"
+import { useDeleteProduct } from "../../Hooks/useDeleteProduct"
 
 const EditProductForm = () => {
     const { id } = useParams()
@@ -40,27 +41,25 @@ const EditProductForm = () => {
 
     const handleInputChange = (setter, event) => {
         setter(event.target.value)
-        console.log('Evento: ', event.target.value)
     }
 
     const handleEditProduct = async (e) => {
         e.preventDefault()
-        //!Verificar Lógica:
         try {
-            const product = {
-                name: productName,
-                category: productCategory,
-                description: productDescription,
-                code: productCode,
-                bigImage: productBigImage,
-                smallImage: productSmallImage,
-                link: productLink,
-                brand: productBrand
-            }
-
             await updateProduct(id)
         } catch (error) {
             console.log('Erro ao alterar informações do produto: ', error)
+        }
+    }
+
+    const { deleteProduct } = useDeleteProduct()
+    const handleDeleteProduct = async (e) => {
+        try {
+            e.preventDefault()
+            await deleteProduct(Number(id))
+            window.location.href = '/products'
+        } catch (error) {
+            console.log('Erro ao excluir o produto: ', error)
         }
     }
 
@@ -68,7 +67,7 @@ const EditProductForm = () => {
         <>
             <h1>Editando: {productName}</h1>
             <Form onSubmit={handleEditProduct}>
-                <FormInput
+                <UncontrolledInput
                     controlId="product_name"
                     label="Nome do Produto"
                     required
@@ -78,7 +77,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductName, event)}
                 />
 
-                <FormInput
+                <UncontrolledInput
                     controlId="product_category"
                     label="Categoria"
                     required
@@ -89,7 +88,7 @@ const EditProductForm = () => {
                     selectedCategory={productCategory}
                 />
 
-                <FormInput
+                <UncontrolledInput
                     controlId="product_description"
                     label="Descrição"
                     required
@@ -99,7 +98,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductDescription, event)}
                 />
 
-                <FormInput
+                <UncontrolledInput
                     controlId="product_code"
                     label="Código"
                     required
@@ -109,7 +108,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductCode, event)}
                 />
 
-                <FormInput
+                <UncontrolledInput
                     controlId="product_image_big"
                     label="Caminho da Imagem Grande"
                     required
@@ -119,7 +118,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductBigImage, event)}
                 />
 
-                <FormInput
+                <UncontrolledInput
                     controlId="product_image_small"
                     label="Caminho da Imagem Pequena"
                     required
@@ -129,7 +128,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductSmallImage, event)}
                 />
 
-                <FormInput
+                <UncontrolledInput
                     controlId="product_link"
                     label="Link externo"
                     required
@@ -139,7 +138,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductLink, event)}
                 />
 
-                <FormInput
+                <UncontrolledInput
                     controlId="product_brand"
                     label="Marca"
                     required
@@ -149,16 +148,27 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductBrand, event)}
                 />
 
-                <Button
-                    {...(isLoading && { disabled: true })}
-                    variant="primary"
-                    type="submit">
-                    Alterar
-                </Button>
+                <Container className="container-fluid d-flex gap-3">
+                    <Button
+                        {...(isLoading && { disabled: true })}
+                        variant="primary"
+                        type="submit">
+                        Alterar
+                    </Button>
+
+                    <Button
+                        {...(isLoading && { disabled: true })}
+                        variant="danger"
+                        type="button"
+                        onClick={handleDeleteProduct}
+                    >
+                        Excluir Produto
+                    </Button>
+                </Container>
 
                 {isLoading && <p>Carregando...</p>}
                 {error && <AlertMessage variant="danger">{error}</AlertMessage>}
-                {success && <AlertMessage variant="success">Produto adicionado com sucesso!</AlertMessage>}
+                {success && <AlertMessage variant="success">Alterações realizadas com sucesso!</AlertMessage>}
             </Form>
         </>
     )

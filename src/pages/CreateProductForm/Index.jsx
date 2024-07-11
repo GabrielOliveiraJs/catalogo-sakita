@@ -1,6 +1,7 @@
 import { Button, Form } from 'react-bootstrap'
 import { useCreateProduct } from '../../Hooks/useCreateProduct'
-import FormInput from '../../components/FormInput/Index'
+import UncontrolledInput from '../../components/FormInput/UncontrolledInput'
+//import FormInput from '../../components/FormInput/ControledInput'
 
 const CreateProductForm = () => {
   const {
@@ -66,7 +67,7 @@ const CreateProductForm = () => {
       <h1>Adicionar um novo produto</h1>
       <Form onSubmit={handleCreateProduct}>
 
-        <FormInput
+        <UncontrolledInput
           controlId="product_name"
           label="Nome do Produto"
           required
@@ -75,7 +76,7 @@ const CreateProductForm = () => {
           onChange={(event) => handleInputChange(setProductName, event)}
         />
 
-        <FormInput
+        <UncontrolledInput
           controlId="product_category"
           label="Categoria"
           required
@@ -85,7 +86,7 @@ const CreateProductForm = () => {
           value={productCategory}
         />
 
-        <FormInput
+        <UncontrolledInput
           controlId="product_description"
           label="Descrição"
           required
@@ -94,14 +95,14 @@ const CreateProductForm = () => {
           onChange={(event) => handleInputChange(setProductDescription, event)}
         />
 
-        <FormInput
+        <UncontrolledInput
           controlId="product_code"
           label="Código"
           required
           type="text"
           placeholder="Digite..."
           onChange={(event) => handleInputChange(setProductCode, event)}
-        /> 
+        />
 
         {/* <Form.Group className="mb-3" controlId="product_image1">
           <Form.Label>Imagem</Form.Label>
@@ -111,7 +112,7 @@ const CreateProductForm = () => {
           />
         </Form.Group> */}
 
-        <FormInput 
+        <UncontrolledInput
           controlId="product_image_big"
           label="Caminho da Imagem Grande"
           required
@@ -120,7 +121,7 @@ const CreateProductForm = () => {
           onChange={(event) => handleInputChange(setProductBigImage, event)}
         />
 
-        <FormInput
+        <UncontrolledInput
           controlId="product_image_small"
           label="Caminho da Imagem Pequena"
           required
@@ -129,7 +130,7 @@ const CreateProductForm = () => {
           onChange={(event) => handleInputChange(setProductSmallImage, event)}
         />
 
-        <FormInput
+        <UncontrolledInput
           controlId="product_link"
           label="Link externo"
           required
@@ -138,7 +139,7 @@ const CreateProductForm = () => {
           onChange={(event) => handleInputChange(setProductLink, event)}
         />
 
-        <FormInput 
+        <UncontrolledInput
           controlId="product_brand"
           label="Marca"
           required
