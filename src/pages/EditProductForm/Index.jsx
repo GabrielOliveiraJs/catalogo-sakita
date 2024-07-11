@@ -66,9 +66,9 @@ const EditProductForm = () => {
     }
 
     return (
-        <div className="m-5">
+        <div className="m-2 m-lg-5">
             <h1>Editando: {productName}</h1>
-            <Form onSubmit={handleEditProduct}>
+            <Form onSubmit={handleEditProduct} className="p-2">
                 <ControlledInput
                     controlId="product_name"
                     label="Nome do Produto"

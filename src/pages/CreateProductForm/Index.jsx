@@ -63,9 +63,9 @@ const CreateProductForm = () => {
   }
 
   return (
-    <>
+    <div className="m-2 m-lg-5">
       <h1>Adicionar um novo produto</h1>
-      <Form onSubmit={handleCreateProduct}>
+      <Form onSubmit={handleCreateProduct} className='p-2'>
 
         <UncontrolledInput
           controlId="product_name"
@@ -159,7 +159,7 @@ const CreateProductForm = () => {
         {error && <AlertMessage variant="danger">{error}</AlertMessage>}
         {success && <AlertMessage variant="success">Produto adicionado com sucesso!</AlertMessage>}
       </Form>
-    </>
+    </div>
   )
 }
 
