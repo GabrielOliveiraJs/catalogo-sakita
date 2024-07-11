@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import { Button, Container, Form } from 'react-bootstrap'
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEditProduct } from "../../Hooks/useEditProduct"
-import UncontrolledInput from "../../components/FormInput/ControledInput"
+import ControlledInput from "../../components/FormInput/ControledInput"
 import AlertMessage from "../../components/AlertMessage/Index"
 import { useDeleteProduct } from "../../Hooks/useDeleteProduct"
 
@@ -53,21 +53,23 @@ const EditProductForm = () => {
     }
 
     const { deleteProduct } = useDeleteProduct()
+    const navigate = useNavigate()
     const handleDeleteProduct = async (e) => {
         try {
             e.preventDefault()
             await deleteProduct(Number(id))
-            window.location.href = '/products'
+            //!Redirecionamento não funcionando
+            navigate('/')
         } catch (error) {
             console.log('Erro ao excluir o produto: ', error)
         }
     }
 
     return (
-        <>
+        <div className="m-5">
             <h1>Editando: {productName}</h1>
             <Form onSubmit={handleEditProduct}>
-                <UncontrolledInput
+                <ControlledInput
                     controlId="product_name"
                     label="Nome do Produto"
                     required
@@ -77,7 +79,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductName, event)}
                 />
 
-                <UncontrolledInput
+                <ControlledInput
                     controlId="product_category"
                     label="Categoria"
                     required
@@ -88,7 +90,7 @@ const EditProductForm = () => {
                     selectedCategory={productCategory}
                 />
 
-                <UncontrolledInput
+                <ControlledInput
                     controlId="product_description"
                     label="Descrição"
                     required
@@ -98,7 +100,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductDescription, event)}
                 />
 
-                <UncontrolledInput
+                <ControlledInput
                     controlId="product_code"
                     label="Código"
                     required
@@ -108,7 +110,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductCode, event)}
                 />
 
-                <UncontrolledInput
+                <ControlledInput
                     controlId="product_image_big"
                     label="Caminho da Imagem Grande"
                     required
@@ -118,7 +120,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductBigImage, event)}
                 />
 
-                <UncontrolledInput
+                <ControlledInput
                     controlId="product_image_small"
                     label="Caminho da Imagem Pequena"
                     required
@@ -128,7 +130,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductSmallImage, event)}
                 />
 
-                <UncontrolledInput
+                <ControlledInput
                     controlId="product_link"
                     label="Link externo"
                     required
@@ -138,7 +140,7 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductLink, event)}
                 />
 
-                <UncontrolledInput
+                <ControlledInput
                     controlId="product_brand"
                     label="Marca"
                     required
@@ -170,7 +172,7 @@ const EditProductForm = () => {
                 {error && <AlertMessage variant="danger">{error}</AlertMessage>}
                 {success && <AlertMessage variant="success">Alterações realizadas com sucesso!</AlertMessage>}
             </Form>
-        </>
+        </div>
     )
 }
 
