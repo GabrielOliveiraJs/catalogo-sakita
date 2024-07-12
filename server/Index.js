@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 
 const options = {
-    origin: 'http://localhost:5173', // Replace with your client's domain
+    origin: 'http://localhost:5173',
     methods: 'GET,POST,PUT,PATCH,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
 }
@@ -81,7 +81,6 @@ app.get('/products/:id', (req, res) => {
 
 app.put('/products/:id', (req, res) => {
     const productId = req.params.id
-    //const updatedFields = req.body
     const { product_name, product_category, product_description, product_code, product_image_small, product_image_big, product_link, product_brand } = req.body
     const query = `
         UPDATE products SET product_name = '${product_name}', product_category = '${product_category}', product_description = '${product_description}', product_code = '${product_code}', product_image_small = '${product_image_small}', product_image_big = '${product_image_big}', product_link = '${product_link}', product_brand = '${product_brand}'

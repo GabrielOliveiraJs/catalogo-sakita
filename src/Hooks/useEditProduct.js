@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function useEditProduct() {
     const [isLoading, setIsLoading] = useState(false)
@@ -48,6 +48,7 @@ export function useEditProduct() {
                 product_brand: productBrand
             })
             setSuccess("Produto atualizado com sucesso")
+            setIsLoading(false)
 
         } catch (error) {
             console.error("Erro ao atualizar o produto:", error)

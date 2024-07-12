@@ -1,7 +1,8 @@
-import { Button, Form } from 'react-bootstrap'
+import { Button, Container, Form } from 'react-bootstrap'
 import { useCreateProduct } from '../../Hooks/useCreateProduct'
 import UncontrolledInput from '../../components/FormInput/UncontrolledInput'
-//import FormInput from '../../components/FormInput/ControledInput'
+import { PropagateLoader } from 'react-spinners'
+import AlertMessage from '../../components/AlertMessage/Index'
 
 const CreateProductForm = () => {
   const {
@@ -17,8 +18,6 @@ const CreateProductForm = () => {
     setProductDescription,
     productCode,
     setProductCode,
-    // productImage,
-    // setProductImage,
     productBigImage,
     setProductBigImage,
     productSmallImage,
@@ -29,15 +28,9 @@ const CreateProductForm = () => {
     setProductBrand
   } = useCreateProduct()
 
-  //const [selectedFile, setSelectedFile] = useState(null)
-
   const handleInputChange = (setter, event) => {
     setter(event.target.value)
   }
-
-  // const handleFileChange = (event) => {
-  //   setSelectedFile(event.target.files[0])
-  // }
 
   const handleCreateProduct = async (e) => {
     e.preventDefault()
@@ -54,7 +47,7 @@ const CreateProductForm = () => {
         brand: productBrand
       }
 
-      await createProduct(product)
+      createProduct(product)
       console.log(product)
 
     } catch (error) {
@@ -104,14 +97,6 @@ const CreateProductForm = () => {
           onChange={(event) => handleInputChange(setProductCode, event)}
         />
 
-        {/* <Form.Group className="mb-3" controlId="product_image1">
-          <Form.Label>Imagem</Form.Label>
-          <Form.Control
-            type="file"
-            onChange={handleFileChange}
-          />
-        </Form.Group> */}
-
         <UncontrolledInput
           controlId="product_image_big"
           label="Caminho da Imagem Grande"
@@ -148,16 +133,18 @@ const CreateProductForm = () => {
           onChange={(event) => handleInputChange(setProductBrand, event)}
         />
 
+        <Container className="my-3 w-100 d-flex justify-content-center">
+          {isLoading && <PropagateLoader color="#5fa8d3" loading size={25} />}
+          {error && <AlertMessage variant="danger">{error}</AlertMessage>}
+          {success && <AlertMessage variant="success">Produto adicionado com sucesso!</AlertMessage>}
+        </Container>
+
         <Button
           {...(isLoading && { disabled: true })}
           variant="primary"
           type="submit">
           Adicionar
         </Button>
-
-        {isLoading && <p>Carregando...</p>}
-        {error && <AlertMessage variant="danger">{error}</AlertMessage>}
-        {success && <AlertMessage variant="success">Produto adicionado com sucesso!</AlertMessage>}
       </Form>
     </div>
   )

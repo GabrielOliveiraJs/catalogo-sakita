@@ -1,10 +1,12 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Button, Container, Form } from 'react-bootstrap'
 import { useNavigate, useParams } from "react-router-dom"
 import { useEditProduct } from "../../Hooks/useEditProduct"
 import ControlledInput from "../../components/FormInput/ControledInput"
 import AlertMessage from "../../components/AlertMessage/Index"
 import { useDeleteProduct } from "../../Hooks/useDeleteProduct"
+import ModalAlert from "../../components/ModalAlert/Index"
+import { PropagateLoader } from "react-spinners"
 
 const EditProductForm = () => {
     const { id } = useParams()
@@ -30,7 +32,6 @@ const EditProductForm = () => {
         isLoading,
         error,
         success,
-        editProduct,
 
     } = useEditProduct()
 
@@ -55,6 +56,7 @@ const EditProductForm = () => {
     const { deleteProduct } = useDeleteProduct()
     const navigate = useNavigate()
     const handleDeleteProduct = async (e) => {
+        setShowModal(!showModal)
         try {
             e.preventDefault()
             await deleteProduct(Number(id))
@@ -63,6 +65,11 @@ const EditProductForm = () => {
         } catch (error) {
             console.log('Erro ao excluir o produto: ', error)
         }
+    }
+
+    const [showModal, setShowModal] = useState(false)
+    const handleModal = () => {
+        setShowModal(!showModal)
     }
 
     return (
@@ -150,6 +157,12 @@ const EditProductForm = () => {
                     onChange={(event) => handleInputChange(setProductBrand, event)}
                 />
 
+                <Container className="my-3 w-100 d-flex justify-content-center">
+                    {isLoading && <PropagateLoader color="#5fa8d3" loading size={25} />}
+                    {error && <AlertMessage variant="danger">{error}</AlertMessage>}
+                    {success && <AlertMessage variant="success">Alterações realizadas com sucesso!</AlertMessage>}
+                </Container>
+
                 <Container className="container-fluid d-flex gap-3">
                     <Button
                         {...(isLoading && { disabled: true })}
@@ -162,15 +175,17 @@ const EditProductForm = () => {
                         {...(isLoading && { disabled: true })}
                         variant="danger"
                         type="button"
-                        onClick={handleDeleteProduct}
+                        onClick={handleModal}
                     >
                         Excluir Produto
                     </Button>
+                    <ModalAlert
+                        onclick={handleDeleteProduct}
+                        productName={productName}
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                    />
                 </Container>
-
-                {isLoading && <p>Carregando...</p>}
-                {error && <AlertMessage variant="danger">{error}</AlertMessage>}
-                {success && <AlertMessage variant="success">Alterações realizadas com sucesso!</AlertMessage>}
             </Form>
         </div>
     )
