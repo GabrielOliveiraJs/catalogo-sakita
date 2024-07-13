@@ -1,9 +1,10 @@
 import { Button, Modal } from 'react-bootstrap'
 
-const ModalAlert = ({ onclick, productName, setShowModal, showModal }) => {
+const ModalAlert = ({ onclick, productName, setShowModal, showModal, handleModal }) => {
     const handleClose = () => {
         setShowModal(false)
     }
+    
     return (
         <Modal show={showModal} onHide={handleClose}>
             <Modal.Header closeButton>

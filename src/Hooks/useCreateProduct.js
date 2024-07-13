@@ -40,6 +40,7 @@ export function useCreateProduct() {
         try {
             const response = await axios.post('http://localhost:8800/api/products', product)
 
+            //!As funções abaixo não estão sendo chamadas
             handleMessages('success', 'Produto inserido com sucesso!')
             clearInputs()
             setIsLoading(false)
