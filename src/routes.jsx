@@ -6,6 +6,8 @@ import ProductsProvider from './contexts/Products'
 import Login from './pages/Login/Index'
 import CreateProductForm from './pages/CreateProductForm/Index'
 import EditProductForm from './pages/EditProductForm/Index'
+import PageNotFound from './pages/PageNotFound/Index'
+import PaginationTest from './pages/PaginationTest/Index'
 
 const AppRoutes = () => {
     return (
@@ -18,7 +20,9 @@ const AppRoutes = () => {
                         <Route path='/login' element={<Login />} />
                         <Route path='/create-product' element={<CreateProductForm />} />
                         <Route path='/product/edit/:id' element={<EditProductForm />} />
+                        <Route path='/pagination' element={<PaginationTest />} />
                     </Route>
+                    <Route path='*' element={<PageNotFound />} />
                 </Routes>
             </ProductsProvider>
         </BrowserRouter>

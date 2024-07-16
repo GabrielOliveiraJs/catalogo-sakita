@@ -4,6 +4,7 @@ import Filter from '../../components/Filter/Index'
 import { useProductsContext } from '../../contexts/Products'
 import { useFilter } from '../../Hooks/useFilter'
 import AlertMessage from '../../components/AlertMessage/Index'
+import PaginationComponent from '../../components/PaginationComponent/Index'
 
 const Home = () => {
 
@@ -30,6 +31,7 @@ const Home = () => {
             ))
         }
       </ul>
+      <PaginationComponent />
     </>
   )
 }
